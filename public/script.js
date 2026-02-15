@@ -7,7 +7,6 @@ const cx = W / 2;
 const cy = H / 2;
 const radius = W * 0.47;
 
-// Tashkent, 15 Nov 2024 16:03 local (UTC+5 => 11:03 UTC).
 const OBS_TIME_UTC = new Date(Date.UTC(2024, 10, 15, 11, 3, 0));
 const OBS_LAT_DEG = 41.3111;
 const OBS_LON_DEG = 69.2797;
@@ -138,7 +137,6 @@ function equatorialToHorizontal(raHours, decDeg, latDeg, lstDeg) {
 }
 
 function horizonProject(altDeg, azRad) {
-  // Zenith-centered polar projection.
   const r = ((90 - altDeg) / 90) * radius;
   return {
     x: Math.sin(azRad) * r,
@@ -215,7 +213,6 @@ function drawSky() {
     ctx.fill();
   });
 
-  // Add dense faint background stars for a fuller sky look.
   const seed =
     OBS_TIME_UTC.getUTCFullYear() * 1000000 +
     (OBS_TIME_UTC.getUTCMonth() + 1) * 10000 +

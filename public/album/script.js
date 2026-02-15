@@ -42,7 +42,6 @@ function imageExists(url) {
 async function findPageImage(bookNumber, pageNumber) {
   for (const ext of IMAGE_EXTENSIONS) {
     const url = `../books/book-${bookNumber}/${pageNumber}.${ext}`;
-    // eslint-disable-next-line no-await-in-loop
     if (await imageExists(url)) {
       return url;
     }
@@ -54,7 +53,6 @@ async function loadBookPages(bookNumber) {
   const pages = [];
 
   for (let page = 1; page <= MAX_PAGES_PER_BOOK; page += 1) {
-    // eslint-disable-next-line no-await-in-loop
     const pageUrl = await findPageImage(bookNumber, page);
     if (!pageUrl) {
       break;
@@ -69,13 +67,11 @@ async function discoverBooks() {
   const result = [];
 
   for (let book = 1; book <= MAX_BOOKS; book += 1) {
-    // eslint-disable-next-line no-await-in-loop
     const firstPage = await findPageImage(book, 1);
     if (!firstPage) {
       break;
     }
 
-    // eslint-disable-next-line no-await-in-loop
     const pages = await loadBookPages(book);
     if (pages.length > 0) {
       result.push({
