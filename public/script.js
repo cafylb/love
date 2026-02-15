@@ -1,78 +1,11 @@
 const canvas = document.getElementById("star-map");
 const ctx = canvas.getContext("2d");
-const bookCover = document.getElementById("bookCover");
 
 const W = canvas.width;
 const H = canvas.height;
 const cx = W / 2;
 const cy = H / 2;
 const radius = W * 0.47;
-
-// Создаем сердца на фоне
-function createHearts() {
-  const heartSymbols = ['❤️', '💕', '💖', '💗', '💝'];
-  const body = document.body;
-  
-  for (let i = 0; i < 15; i++) {
-    const heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-    heart.style.left = Math.random() * 100 + '%';
-    heart.style.top = Math.random() * 100 + '%';
-    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-    heart.style.animationDelay = Math.random() * 6 + 's';
-    heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-    body.appendChild(heart);
-  }
-}
-
-// Свайп функциональность
-let touchStartX = 0;
-let touchEndX = 0;
-
-function handleTouchStart(e) {
-  touchStartX = e.touches[0].clientX;
-}
-
-function handleTouchEnd(e) {
-  touchEndX = e.changedTouches[0].clientX;
-  handleSwipe();
-}
-
-function handleSwipe() {
-  const swipeThreshold = 50;
-  const diff = touchEndX - touchStartX;
-  
-  if (diff > swipeThreshold) {
-    // Свайп вправо - закрываем обложку
-    if (bookCover.classList.contains('active')) {
-      bookCover.classList.remove('active');
-    }
-  } else if (diff < -swipeThreshold) {
-    // Свайп влево - открываем обложку
-    if (!bookCover.classList.contains('active')) {
-      bookCover.classList.add('active');
-    }
-  }
-}
-
-// Инициализация свайпов
-document.addEventListener('touchstart', handleTouchStart, { passive: true });
-document.addEventListener('touchend', handleTouchEnd, { passive: true });
-
-// Клик по обложке для закрытия
-bookCover.addEventListener('click', function() {
-  this.classList.remove('active');
-});
-
-// Показываем обложку на мобильных устройствах
-function isMobile() {
-  return window.innerWidth <= 640;
-}
-
-if (isMobile()) {
-  bookCover.classList.add('active');
-}
 
 function mulberry32(seed) {
   let t = seed >>> 0;
@@ -203,6 +136,3 @@ function render() {
 }
 
 render();
-
-// Создаем сердца на фоне
-createHearts();
