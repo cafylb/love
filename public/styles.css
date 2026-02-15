@@ -35,8 +35,14 @@ body {
 }
 
 .top-title {
+  display: grid;
+  place-items: center;
   text-align: center;
   padding: clamp(10px, 2vw, 18px) 10px clamp(18px, 3.4vw, 28px);
+}
+
+.top-title h1 {
+  text-align: center;
 }
 
 .sky-frame {
