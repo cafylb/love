@@ -229,9 +229,9 @@ function drawSky() {
     const azRad = rand() * Math.PI * 2;
     const p = horizonProject(altDeg, azRad);
 
-    const brightness = Math.pow(rand(), 0.42);
-    const size = 0.22 + brightness * 1.15;
-    const alpha = 0.08 + brightness * 0.42;
+    const brightness = Math.pow(rand(), 0.36);
+    const size = 0.3 + brightness * 1.35;
+    const alpha = 0.16 + brightness * 0.56;
 
     ctx.beginPath();
     ctx.fillStyle = `rgba(242, 248, 255, ${alpha})`;
@@ -239,7 +239,7 @@ function drawSky() {
     ctx.fill();
 
     if (rand() > 0.992) {
-      ctx.strokeStyle = `rgba(232, 241, 255, ${Math.min(0.48, alpha + 0.1)})`;
+      ctx.strokeStyle = `rgba(232, 241, 255, ${Math.min(0.66, alpha + 0.16)})`;
       ctx.lineWidth = 0.5;
       ctx.beginPath();
       ctx.moveTo(p.x - 2.6, p.y);
