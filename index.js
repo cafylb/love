@@ -41,5 +41,9 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
+  consolc
+})
+
+server.listen(PORT, () => {
   console.log(`Website is running on http://localhost:${PORT}`);
 });
