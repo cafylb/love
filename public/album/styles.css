@@ -34,10 +34,6 @@ body {
   padding: clamp(16px, 4vw, 28px);
 }
 
-.rotate-lock {
-  display: none;
-}
-
 .book-shell {
   width: 100%;
   display: grid;
@@ -98,6 +94,7 @@ body {
 .cover-title {
   font-family: "Marck Script", cursive;
   font-size: clamp(34px, 4.2vw, 48px);
+  line-height: 1.05;
 }
 
 .pages {
@@ -206,21 +203,15 @@ body {
 
 @media (max-width: 900px) and (orientation: portrait) {
   .album-scene {
-    display: none;
+    padding: 8px;
   }
 
-  .hearts {
-    display: none;
+  .book-shell {
+    padding: 0;
+    transform: rotate(90deg);
   }
 
-  .rotate-lock {
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    padding: 24px;
-    text-align: center;
-    font-size: clamp(20px, 6vw, 30px);
-    font-weight: 700;
-    color: #7a2f4a;
+  .book {
+    --page-w: clamp(125px, 34vh, 230px);
   }
 }
