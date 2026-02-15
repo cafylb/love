@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500" viewBox="0 0 1000 1500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffe8f3"/>
+      <stop offset="100%" stop-color="#ffd6eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="1500" fill="url(#bg)"/>
+  <rect x="48" y="48" width="904" height="1404" rx="24" fill="none" stroke="#eab1ce" stroke-width="10"/>
+  <rect x="88" y="88" width="824" height="1324" rx="20" fill="none" stroke="#f4c9dd" stroke-width="6"/>
+  <circle cx="500" cy="760" r="290" fill="#fff8fc" stroke="#efc0d8" stroke-width="8"/>
+  <text x="500" y="730" font-family="Jura, sans-serif" font-size="54" fill="#8f4664" text-anchor="middle">Наша история</text>
+  <text x="500" y="810" font-family="Jura, sans-serif" font-size="40" fill="#a35676" text-anchor="middle">Страница 6</text>
+</svg>

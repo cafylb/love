@@ -16,7 +16,8 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-  const reqPath = req.url === "/" ? "/index.html" : req.url;
+  const urlPath = (req.url || "/").split("?")[0];
+  const reqPath = urlPath.endsWith("/") ? `${urlPath}index.html` : urlPath;
   const filePath = path.normalize(path.join(PUBLIC_DIR, reqPath));
 
   if (!filePath.startsWith(PUBLIC_DIR)) {
@@ -39,10 +40,6 @@ const server = http.createServer((req, res) => {
     res.end(data);
   });
 });
-
-server.listen(PORT, () => {
-  consolc
-})
 
 server.listen(PORT, () => {
   console.log(`Website is running on http://localhost:${PORT}`);

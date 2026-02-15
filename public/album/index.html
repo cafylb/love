@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Наш Альбом</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jura:wght@500;700&family=Marck+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="hearts" aria-hidden="true"></div>
+
+    <main class="album-scene">
+      <p class="hint">Нажми на обложку, чтобы открыть или закрыть книгу. Нажимай на страницы, чтобы листать.</p>
+
+      <section class="book-shell" id="book-shell">
+        <div class="book" id="book">
+          <button class="front-cover" id="cover-btn" type="button" aria-label="Обложка книги">
+            <span class="cover-title">Наша Книга</span>
+            <span class="cover-subtitle">Открой меня</span>
+          </button>
+
+          <div class="spine" aria-hidden="true"></div>
+
+          <button class="pages pages-left" id="left-page" type="button" aria-label="Левая страница">
+            <div class="page-border">
+              <img class="page-image" id="left-image" alt="Левая страница книги" />
+            </div>
+          </button>
+
+          <button class="pages pages-right" id="right-page" type="button" aria-label="Правая страница">
+            <div class="page-border">
+              <img class="page-image" id="right-image" alt="Правая страница книги" />
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <p class="status" id="status-text">Загрузка книги...</p>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
