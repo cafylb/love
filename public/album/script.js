@@ -93,7 +93,9 @@ function renderSpread() {
   if (!book) {
     leftImage.removeAttribute("src");
     rightImage.removeAttribute("src");
-    statusText.textContent = "В папке books пока нет книг.";
+    if (statusText) {
+      statusText.textContent = "В папке books пока нет книг.";
+    }
     return;
   }
 
@@ -112,9 +114,11 @@ function renderSpread() {
     rightImage.removeAttribute("src");
   }
 
-  const currentSpread = Math.floor(activeSpreadStart / 2) + 1;
-  const totalSpreads = Math.max(1, Math.ceil(book.pages.length / 2));
-  statusText.textContent = `Книга ${book.number}. Разворот ${currentSpread} из ${totalSpreads}`;
+  if (statusText) {
+    const currentSpread = Math.floor(activeSpreadStart / 2) + 1;
+    const totalSpreads = Math.max(1, Math.ceil(book.pages.length / 2));
+    statusText.textContent = `Книга ${book.number}. Разворот ${currentSpread} из ${totalSpreads}`;
+  }
 }
 
 function toggleBook() {
