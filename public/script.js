@@ -6,6 +6,8 @@ const H = canvas.height;
 const cx = W / 2;
 const cy = H / 2;
 const radius = W * 0.47;
+const START_ROTATION_RAD = Math.PI * 2.12;
+const INTRO_DURATION_MS = 2400;
 
 const OBS_TIME_UTC = new Date(Date.UTC(2024, 10, 15, 11, 3, 0));
 const OBS_LAT_DEG = 41.3111;
@@ -177,7 +179,10 @@ function drawBase() {
   }
 }
 
-function drawSky() {
+function drawSky(rotationRad) {
+  ctx.save();
+  ctx.rotate(rotationRad);
+
   const lst = localSiderealDeg(OBS_TIME_UTC, OBS_LON_DEG);
   const visible = new Map();
 
@@ -221,7 +226,7 @@ function drawSky() {
   const rand = mulberry32(seed);
   const faintCount = 1300;
   for (let i = 0; i < faintCount; i += 1) {
-    const sinAlt = rand(); // 0..1 hemisphere
+    const sinAlt = rand();
     const altDeg = (Math.asin(sinAlt) * 180) / Math.PI;
     const azRad = rand() * Math.PI * 2;
     const p = horizonProject(altDeg, azRad);
@@ -246,6 +251,8 @@ function drawSky() {
       ctx.stroke();
     }
   }
+
+  ctx.restore();
 }
 
 function drawDirections() {
@@ -264,11 +271,29 @@ function drawDirections() {
   dirs.forEach((d) => ctx.fillText(d.label, d.x, d.y));
 }
 
-function render() {
+function render(rotationRad = 0) {
   drawBase();
-  drawSky();
+  drawSky(rotationRad);
   drawDirections();
   ctx.restore();
 }
 
-render();
+function easeOutCubic(t) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+function runIntro() {
+  const start = performance.now();
+
+  function frame(now) {
+    const t = Math.min(1, (now - start) / INTRO_DURATION_MS);
+    const eased = easeOutCubic(t);
+    const rotation = START_ROTATION_RAD * (1 - eased);
+    render(rotation);
+    if (t < 1) requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+}
+
+runIntro();
