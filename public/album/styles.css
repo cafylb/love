@@ -44,13 +44,14 @@ body {
 
 .book {
   --page-w: clamp(170px, 38vw, 300px);
+  --closed-shift: calc(var(--page-w) * -0.5);
   --open-shift: clamp(42px, 8vw, 110px);
   --page-h: calc(var(--page-w) * 1.5);
   position: relative;
   width: calc(var(--page-w) * 2 + 18px);
   height: var(--page-h);
   transform-style: preserve-3d;
-  transform: translateX(0) rotateX(2deg) rotateY(0deg);
+  transform: translateX(var(--closed-shift)) rotateX(2deg) rotateY(0deg);
   transition: transform 760ms cubic-bezier(0.22, 0.8, 0.22, 1);
 }
 
@@ -123,6 +124,9 @@ body {
   color: rgba(255, 233, 242, 0.9);
   text-shadow: 0 0 9px rgba(255, 190, 219, 0.8);
   pointer-events: none;
+  transition:
+    opacity 260ms ease,
+    transform 260ms ease;
 }
 
 .cover-heart-top {
@@ -188,7 +192,12 @@ body {
 }
 
 .book.open {
-  transform: translateX(var(--open-shift)) rotateX(0deg) rotateY(-5deg);
+  transform: translateX(calc(var(--closed-shift) + var(--open-shift))) rotateX(0deg) rotateY(-5deg);
+}
+
+.book.open .cover-heart-border {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.86);
 }
 
 .book.open .pages {
