@@ -121,8 +121,12 @@ body {
   box-shadow:
     inset 0 0 0 1px rgba(84, 41, 58, 0.2),
     0 8px 20px rgba(91, 31, 53, 0.15);
-  transition: transform 350ms ease;
+  transition:
+    transform 350ms ease,
+    opacity 250ms ease;
   z-index: 12;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .pages-left {
@@ -153,12 +157,25 @@ body {
   transform: translateX(-9px) rotateY(-160deg);
 }
 
+.book.open .pages {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .book.flipping .pages-right {
   transform: perspective(1200px) rotateY(-14deg);
 }
 
 .book.flipping .pages-left {
   transform: perspective(1200px) rotateY(8deg);
+}
+
+.book.flipping-back .pages-left {
+  transform: perspective(1200px) rotateY(14deg);
+}
+
+.book.flipping-back .pages-right {
+  transform: perspective(1200px) rotateY(-8deg);
 }
 
 .status {

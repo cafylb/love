@@ -150,20 +150,52 @@ function flipForward() {
   }, 380);
 }
 
+function flipBackward() {
+  if (activeSpreadStart === 0) {
+    isOpen = false;
+    bookElement.classList.remove("open");
+    return;
+  }
+
+  if (isFlipping) {
+    return;
+  }
+
+  isFlipping = true;
+  bookElement.classList.add("flipping-back");
+
+  setTimeout(() => {
+    activeSpreadStart = Math.max(0, activeSpreadStart - 2);
+    renderSpread();
+  }, 170);
+
+  setTimeout(() => {
+    isFlipping = false;
+    bookElement.classList.remove("flipping-back");
+  }, 380);
+}
+
 function bindEvents() {
   coverButton.addEventListener("click", () => {
     toggleBook();
   });
 
-  const onPageClick = () => {
+  const onLeftPageClick = () => {
+    if (!isOpen) {
+      return;
+    }
+    flipBackward();
+  };
+
+  const onRightPageClick = () => {
     if (!isOpen) {
       return;
     }
     flipForward();
   };
 
-  leftPageButton.addEventListener("click", onPageClick);
-  rightPageButton.addEventListener("click", onPageClick);
+  leftPageButton.addEventListener("click", onLeftPageClick);
+  rightPageButton.addEventListener("click", onRightPageClick);
 }
 
 async function init() {
