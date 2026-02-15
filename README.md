@@ -13,4 +13,3 @@ Static files for the site are in `public/`.
 Your site URL will be:
 
 `https://<your-github-username>.github.io/<repo-name>/`
-д
