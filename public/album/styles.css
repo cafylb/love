@@ -14,6 +14,13 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -21,9 +28,9 @@ body {
     radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.58), transparent 44%),
     radial-gradient(circle at 78% 88%, rgba(255, 244, 250, 0.48), transparent 42%),
     linear-gradient(165deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
-  overflow-x: hidden;
   font-family: "Jura", sans-serif;
   color: var(--ink);
+  touch-action: manipulation;
 }
 
 .album-scene {
@@ -43,7 +50,7 @@ body {
 }
 
 .book {
-  --page-w: clamp(170px, 38vw, 300px);
+  --page-w: clamp(190px, 40vw, 340px);
   --closed-shift: calc(var(--page-w) * -0.5);
   --open-shift: clamp(42px, 8vw, 110px);
   --page-h: calc(var(--page-w) * 1.5);
@@ -135,6 +142,34 @@ body {
 
 .cover-heart-bottom {
   bottom: 24px;
+}
+
+.cover-sticker {
+  display: none;
+  position: absolute;
+  width: clamp(34px, 4.2vw, 48px);
+  aspect-ratio: 1;
+  border-radius: 12px;
+  place-items: center;
+  font-size: clamp(16px, 2.1vw, 22px);
+  color: #ff4f83;
+  background: rgba(255, 242, 247, 0.94);
+  box-shadow:
+    0 8px 18px rgba(90, 30, 53, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.92);
+  pointer-events: none;
+}
+
+.cover-sticker-top {
+  top: 22px;
+  right: 22px;
+  transform: rotate(11deg);
+}
+
+.cover-sticker-bottom {
+  bottom: 22px;
+  left: 24px;
+  transform: rotate(-10deg);
 }
 
 .pages {
@@ -257,6 +292,13 @@ body {
   }
 }
 
+@media (min-width: 1100px) {
+  .book {
+    --page-w: clamp(250px, 37vw, 390px);
+    --open-shift: clamp(70px, 10vw, 150px);
+  }
+}
+
 @media (max-width: 900px) and (orientation: portrait) {
   .album-scene {
     padding: 8px;
@@ -270,5 +312,28 @@ body {
   .book {
     --page-w: clamp(125px, 34vh, 230px);
     --open-shift: clamp(16px, 4vh, 36px);
+  }
+}
+
+@media (max-width: 900px) {
+  .cover-heart-border {
+    display: none;
+  }
+
+  .cover-sticker {
+    display: grid;
+  }
+
+  .book.open .cover-sticker {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cover-sticker-top {
+    transform: rotate(11deg);
+  }
+
+  .cover-sticker-bottom {
+    transform: rotate(-10deg);
   }
 }
