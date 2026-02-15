@@ -14,15 +14,15 @@
   </head>
   <body>
     <div class="hearts" aria-hidden="true"></div>
+    <section class="rotate-lock" aria-live="polite">
+      Поверни телефон в альбомный режим
+    </section>
 
     <main class="album-scene">
-      <p class="hint">Нажми на обложку, чтобы открыть или закрыть книгу. Нажимай на страницы, чтобы листать.</p>
-
       <section class="book-shell" id="book-shell">
         <div class="book" id="book">
           <button class="front-cover" id="cover-btn" type="button" aria-label="Обложка книги">
             <span class="cover-title">Наша Книга</span>
-            <span class="cover-subtitle">Открой меня</span>
           </button>
 
           <div class="spine" aria-hidden="true"></div>
@@ -40,8 +40,6 @@
           </button>
         </div>
       </section>
-
-      <p class="status" id="status-text">Загрузка книги...</p>
     </main>
 
     <script src="./script.js"></script>
