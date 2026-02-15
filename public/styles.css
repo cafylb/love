@@ -12,9 +12,8 @@
 body {
   margin: 0;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
   padding: 24px;
   background:
     radial-gradient(circle at 20% 15%, rgba(43, 74, 148, 0.22), transparent 40%),
@@ -23,8 +22,6 @@ body {
   color: var(--fg);
   font-family: "Jura", sans-serif;
   letter-spacing: 0.06em;
-  position: relative;
-  overflow: hidden;
 }
 
 .poster {
@@ -86,19 +83,6 @@ h1 {
   .poster {
     width: 100%;
     padding: 12px;
-    position: relative;
-  }
-
-  .poster::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    background: linear-gradient(45deg, #ff6b9d, #c44569, #ff6b9d);
-    z-index: -1;
-    border-radius: 8px;
   }
 
   h1 {
@@ -109,65 +93,4 @@ h1 {
   .message-text {
     font-size: clamp(16px, 5vw, 22px);
   }
-
-  .book-cover {
-    display: none;
-  }
-}
-
-.heart {
-  position: absolute;
-  color: rgba(255, 107, 157, 0.6);
-  animation: float 6s ease-in-out infinite;
-  pointer-events: none;
-  z-index: -1;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(10deg); }
-}
-
-.book-cover {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  cursor: pointer;
-}
-
-.book-cover.active {
-  display: flex;
-}
-
-.book-cover-content {
-  text-align: center;
-  color: white;
-  padding: 40px;
-}
-
-.book-cover h2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-.swipe-hint {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 1.2rem;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 0.4; }
 }
