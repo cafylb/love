@@ -76,6 +76,16 @@ const CONSTELLATION_LINES = [
   ["kochab", "pherkad"]
 ];
 
+function mulberry32(seed) {
+  let t = seed >>> 0;
+  return function rand() {
+    t += 0x6d2b79f5;
+    let r = Math.imul(t ^ (t >>> 15), 1 | t);
+    r ^= r + Math.imul(r ^ (r >>> 7), 61 | r);
+    return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
 function degToRad(deg) {
   return (deg * Math.PI) / 180;
 }
@@ -204,6 +214,41 @@ function drawSky() {
     ctx.arc(star.x, star.y, size, 0, Math.PI * 2);
     ctx.fill();
   });
+
+  // Add dense faint background stars for a fuller sky look.
+  const seed =
+    OBS_TIME_UTC.getUTCFullYear() * 1000000 +
+    (OBS_TIME_UTC.getUTCMonth() + 1) * 10000 +
+    OBS_TIME_UTC.getUTCDate() * 100 +
+    OBS_TIME_UTC.getUTCHours();
+  const rand = mulberry32(seed);
+  const faintCount = 1300;
+  for (let i = 0; i < faintCount; i += 1) {
+    const sinAlt = rand(); // 0..1 hemisphere
+    const altDeg = (Math.asin(sinAlt) * 180) / Math.PI;
+    const azRad = rand() * Math.PI * 2;
+    const p = horizonProject(altDeg, azRad);
+
+    const brightness = Math.pow(rand(), 0.42);
+    const size = 0.22 + brightness * 1.15;
+    const alpha = 0.08 + brightness * 0.42;
+
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(242, 248, 255, ${alpha})`;
+    ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (rand() > 0.992) {
+      ctx.strokeStyle = `rgba(232, 241, 255, ${Math.min(0.48, alpha + 0.1)})`;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(p.x - 2.6, p.y);
+      ctx.lineTo(p.x + 2.6, p.y);
+      ctx.moveTo(p.x, p.y - 2.6);
+      ctx.lineTo(p.x, p.y + 2.6);
+      ctx.stroke();
+    }
+  }
 }
 
 function drawDirections() {
