@@ -26,10 +26,16 @@
       </section>
 
       <section class="messages" aria-label="Мои послания">
-        <h2>Мои послания тебе</h2>
-        <article class="message-card">Ты мое самое спокойное место в этом мире.</article>
-        <article class="message-card">Рядом с тобой каждый день становится теплее.</article>
-        <article class="message-card">Спасибо за нашу историю, которую я очень берегу.</article>
+        <svg class="message-curve" viewBox="0 0 1000 300" role="img" aria-label="Мое послание тебе">
+          <defs>
+            <path id="message-arc" d="M 90 225 Q 500 40 910 225" />
+          </defs>
+          <text class="curve-text">
+            <textPath href="#message-arc" startOffset="50%" text-anchor="middle">
+              Ты мое самое спокойное место в этом мире, и я люблю тебя все сильнее каждый день.
+            </textPath>
+          </text>
+        </svg>
       </section>
     </main>
 
