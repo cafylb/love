@@ -1,6 +1,7 @@
 const MAX_BOOKS = 40;
 const MAX_PAGES_PER_BOOK = 120;
-const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "webp", "svg"];
+const IMAGE_EXTENSIONS = ["png"];
+const CACHE_KEY = "album_books_cache_v2";
 
 const heartsRoot = document.querySelector(".hearts");
 const bookElement = document.getElementById("book");
@@ -16,6 +17,34 @@ let activeBookIndex = 0;
 let activeSpreadStart = 0;
 let isOpen = false;
 let isFlipping = false;
+
+function loadCachedBooks() {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) {
+      return [];
+    }
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+    return parsed
+      .filter((book) => book && Number.isFinite(book.number) && Array.isArray(book.pages))
+      .map((book) => ({
+        number: book.number,
+        pages: book.pages.filter((p) => typeof p === "string" && p.length > 0)
+      }))
+      .filter((book) => book.pages.length > 0);
+  } catch {
+    return [];
+  }
+}
+
+function saveCachedBooks(items) {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify(items));
+  } catch {}
+}
 
 function createHearts() {
   for (let i = 0; i < 24; i += 1) {
@@ -74,7 +103,7 @@ async function discoverBooksProgressive() {
   for (let bookNumber = 1; bookNumber <= MAX_BOOKS; bookNumber += 1) {
     const firstPage = await findPageImage(bookNumber, 1);
     if (!firstPage) {
-      break;
+      continue;
     }
 
     const book = {
@@ -221,8 +250,20 @@ async function init() {
   createHearts();
   bindEvents();
 
-  books = await discoverBooksProgressive();
-  renderSpread();
+  const cachedBooks = loadCachedBooks();
+  if (cachedBooks.length > 0) {
+    books = cachedBooks;
+    renderSpread();
+  }
+
+  const freshBooks = await discoverBooksProgressive();
+  if (freshBooks.length > 0) {
+    books = freshBooks;
+    saveCachedBooks(freshBooks);
+    renderSpread();
+  } else if (books.length === 0) {
+    renderSpread();
+  }
 }
 
 init();
