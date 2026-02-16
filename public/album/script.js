@@ -60,7 +60,7 @@ async function loadRemainingPages(bookNumber, book, startPage) {
     if (!pageUrl) {
       break;
     }
-    book.pages.push(pageUrl);
+    book.pages[page - 1] = pageUrl;
     prefetchImage(pageUrl);
     if (books[activeBookIndex] === book) {
       renderSpread();
@@ -79,13 +79,14 @@ async function discoverBooksProgressive() {
 
     const book = {
       number: bookNumber,
-      pages: [firstPage]
+      pages: []
     };
+    book.pages[0] = firstPage;
     result.push(book);
 
     const secondPage = await findPageImage(bookNumber, 2);
     if (secondPage) {
-      book.pages.push(secondPage);
+      book.pages[1] = secondPage;
       prefetchImage(secondPage);
     }
 
@@ -128,7 +129,8 @@ function renderSpread() {
 
   if (statusText) {
     const currentSpread = Math.floor(activeSpreadStart / 2) + 1;
-    const totalSpreads = Math.max(1, Math.ceil(book.pages.length / 2));
+    const loadedPageCount = book.pages.filter(Boolean).length;
+    const totalSpreads = Math.max(1, Math.ceil(loadedPageCount / 2));
     statusText.textContent = `Книга ${book.number}. Разворот ${currentSpread} из ${totalSpreads}`;
   }
 }
@@ -144,7 +146,8 @@ function flipForward() {
     return;
   }
 
-  if (activeSpreadStart + 2 >= book.pages.length) {
+  const loadedPageCount = book.pages.filter(Boolean).length;
+  if (activeSpreadStart + 2 >= loadedPageCount) {
     return;
   }
 
