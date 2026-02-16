@@ -35,7 +35,7 @@ function imageExists(url) {
     const img = new Image();
     img.onload = () => resolve(true);
     img.onerror = () => resolve(false);
-    img.src = `${url}?v=${Date.now()}`;
+    img.src = url;
   });
 }
 
@@ -49,36 +49,52 @@ async function findPageImage(bookNumber, pageNumber) {
   return null;
 }
 
-async function loadBookPages(bookNumber) {
-  const pages = [];
+function prefetchImage(url) {
+  const img = new Image();
+  img.src = url;
+}
 
-  for (let page = 1; page <= MAX_PAGES_PER_BOOK; page += 1) {
+async function loadRemainingPages(bookNumber, book, startPage) {
+  for (let page = startPage; page <= MAX_PAGES_PER_BOOK; page += 1) {
     const pageUrl = await findPageImage(bookNumber, page);
     if (!pageUrl) {
       break;
     }
-    pages.push(pageUrl);
+    book.pages.push(pageUrl);
+    prefetchImage(pageUrl);
+    if (books[activeBookIndex] === book) {
+      renderSpread();
+    }
   }
-
-  return pages;
 }
 
-async function discoverBooks() {
+async function discoverBooksProgressive() {
   const result = [];
 
-  for (let book = 1; book <= MAX_BOOKS; book += 1) {
-    const firstPage = await findPageImage(book, 1);
+  for (let bookNumber = 1; bookNumber <= MAX_BOOKS; bookNumber += 1) {
+    const firstPage = await findPageImage(bookNumber, 1);
     if (!firstPage) {
       break;
     }
 
-    const pages = await loadBookPages(book);
-    if (pages.length > 0) {
-      result.push({
-        number: book,
-        pages
-      });
+    const book = {
+      number: bookNumber,
+      pages: [firstPage]
+    };
+    result.push(book);
+
+    const secondPage = await findPageImage(bookNumber, 2);
+    if (secondPage) {
+      book.pages.push(secondPage);
+      prefetchImage(secondPage);
     }
+
+    if (result.length === 1) {
+      books = result;
+      renderSpread();
+    }
+
+    loadRemainingPages(bookNumber, book, 3);
   }
 
   return result;
@@ -202,7 +218,7 @@ async function init() {
   createHearts();
   bindEvents();
 
-  books = await discoverBooks();
+  books = await discoverBooksProgressive();
   renderSpread();
 }
 
