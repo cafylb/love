@@ -261,7 +261,7 @@ function drawDirections() {
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
 
-  const dirs = [
+  const dirs = [  
     { label: "NORTH", x: 0, y: -radius - 24 },
     { label: "EAST", x: radius + 24, y: 0 },
     { label: "SOUTH", x: 0, y: radius + 24 },
