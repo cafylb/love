@@ -95,6 +95,43 @@ h1 {
   color: rgba(230, 242, 255, 0.96);
 }
 
+.actions {
+  display: flex;
+  justify-content: center;
+  padding: 14px 0 6px;
+}
+
+.gift-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 22px;
+  border: 1px solid rgba(196, 221, 255, 0.64);
+  border-radius: 999px;
+  color: #f4f8ff;
+  text-decoration: none;
+  font-size: clamp(13px, 2vw, 16px);
+  letter-spacing: 0.08em;
+  background:
+    linear-gradient(120deg, rgba(72, 113, 198, 0.28), rgba(160, 70, 124, 0.28));
+  box-shadow:
+    0 10px 22px rgba(22, 32, 58, 0.4),
+    inset 0 0 0 1px rgba(242, 248, 255, 0.13);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.gift-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(223, 236, 255, 0.92);
+  box-shadow:
+    0 14px 30px rgba(22, 35, 65, 0.5),
+    inset 0 0 0 1px rgba(242, 248, 255, 0.24);
+}
+
 @media (max-width: 640px) {
   .poster {
     width: 100%;
