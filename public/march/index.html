@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Поздравляю с 8 марта !</title>
+    <meta
+      name="description"
+      content="Теплое поздравление для самой любимой мамы на 8 марта"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background-glow background-glow--left" aria-hidden="true"></div>
+    <div class="background-glow background-glow--right" aria-hidden="true"></div>
+    <div id="petals" class="petals" aria-hidden="true"></div>
+
+    <main class="page">
+      <section class="hero reveal">
+        <p class="date-pill">🌺 8 марта 🌺</p>
+        <h1>Мое самое теплое чудо</h1>
+        <p class="hero-text">
+          Спасибо за любовь, заботу и доброту, в этот день я смогу показать насколько сильно люблю, не действиями а словами
+        </p>
+        <div class="hero-actions">
+          <button id="petalBtn" class="btn btn--soft" type="button">
+            🌸 Запустить лепестки 🌸
+          </button>
+        </div>
+      </section>
+
+      <section class="reasons reveal" aria-label="Причины">
+        <article class="reason-card">
+          <p class="reason-icon">❤</p>
+          <h2>Твое сердце</h2>
+          <p>
+            То что никогда не покажет, но все же вспомнит про любовь
+          </p>
+        </article>
+        <article class="reason-card">
+          <p class="reason-icon">✿</p>
+          <h2>Твоя забота</h2>
+          <p>
+            Даже если ты ее или не проявляешь или проявляешь слишком сильно, я все равно ее ценю  
+          </p>
+        </article>
+        <article class="reason-card">
+          <p class="reason-icon">☀</p>
+          <h2>Твоя сила</h2>
+          <p>
+            Ты сильна не мускулами и телом, а крепким характером
+          </p>
+        </article>
+      </section>
+
+      <section id="letter" class="letter reveal">
+        <h2>Письмо для тебя 💌</h2>
+        <p>
+          Поздравляю тебя с 8 марта, желаю всего наилучшего и прекрасного, живи сотни лет и всегда радуй нас своей красотой и отвагой. Защищай от всего плохого 
+        </p>
+        <p class="signature">С любовью, твой ребенок</p>
+      </section>
+
+      <section class="album reveal" aria-label="Книжка-альбом">
+        <div class="album-book">
+          <button class="album-nav" id="albumPrev" type="button" aria-label="Предыдущая страница">
+            ←
+          </button>
+
+          <div class="album-pages" id="albumPages">
+            <article class="album-page">
+              <p class="album-page-num">От меня</p>
+              <h3>От сына</h3>
+              <p></p>
+            </article>
+
+            <article class="album-page">
+              <p class="album-page-num">От маржоны</p>
+              <h3>Слова старшей дочки</h3>
+              <p></p>
+            </article>
+
+            <article class="album-page">
+              <p class="album-page-num">От шукроны</p>
+              <h3>Слова младшего ангелочка</h3>
+              <p></p>
+            </article>
+
+            <article class="album-page">
+              <p class="album-page-num">От папы</p>
+              <h3>Слова от мужа</h3>
+              <p></p>
+            </article>
+          </div>
+
+          <button class="album-nav" id="albumNext" type="button" aria-label="Следующая страница">
+            →
+          </button>
+        </div>
+
+        <p class="album-counter">
+          <span id="albumCurrent">1</span>
+          /
+          <span id="albumTotal">4</span>
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer reveal">С праздником весны, мама 🌷</footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
