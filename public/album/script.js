@@ -59,7 +59,7 @@ function createHearts() {
   }
 }
 
-function imageExists(url) {
+function imageExists(url) { 
   return new Promise((resolve) => {
     const img = new Image();
     img.onload = () => resolve(true);
