@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sunshine</title>
+    <meta
+      name="description"
+      content="Темная страница с портретом и фокусом на центральном тексте."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="flow" class="flow-lines" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <span class="lang-label">Русский</span>
+    </header>
+
+    <main class="sunshine-page">
+      <section class="center-copy" aria-label="Центральный текст">
+        <h1>ТЕКСТ</h1>
+      </section>
+
+      <figure class="portrait" aria-label="Портрет">
+        <img src="girl.jpg" alt="Портрет девушки под зонтом" />
+      </figure>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

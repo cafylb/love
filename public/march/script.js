@@ -1,6 +1,7 @@
 const revealItems = document.querySelectorAll('.reveal');
 const petalsHost = document.getElementById('petals');
 const petalButton = document.getElementById('petalBtn');
+const albumPagesHost = document.getElementById('albumPages');
 const albumPages = Array.from(document.querySelectorAll('.album-page'));
 const albumPrev = document.getElementById('albumPrev');
 const albumNext = document.getElementById('albumNext');
@@ -63,10 +64,18 @@ setTimeout(() => {
   burstPetals(20);
 }, 500);
 
-if (albumPages.length > 0 && albumPrev && albumNext && albumCurrent && albumTotal) {
+if (albumPages.length > 0 && albumPagesHost && albumPrev && albumNext && albumCurrent && albumTotal) {
   let currentPage = 0;
 
   albumTotal.textContent = String(albumPages.length);
+
+  function syncAlbumHeight() {
+    let maxHeight = 260;
+    albumPages.forEach((page) => {
+      maxHeight = Math.max(maxHeight, page.scrollHeight + 6);
+    });
+    albumPagesHost.style.minHeight = `${maxHeight}px`;
+  }
 
   function setAlbumPage(index) {
     currentPage = (index + albumPages.length) % albumPages.length;
@@ -93,5 +102,8 @@ if (albumPages.length > 0 && albumPrev && albumNext && albumCurrent && albumTota
     setAlbumPage(currentPage + 1);
   });
 
+  syncAlbumHeight();
+  window.addEventListener('load', syncAlbumHeight);
+  window.addEventListener('resize', syncAlbumHeight);
   setAlbumPage(0);
 }

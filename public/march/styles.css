@@ -234,6 +234,8 @@ h1 {
   position: relative;
   min-height: 260px;
   perspective: 1200px;
+  overflow: hidden;
+  border-radius: 20px;
 }
 
 .album-page {
@@ -255,12 +257,14 @@ h1 {
   opacity: 0;
   transform: rotateY(-14deg) translateX(24px) scale(0.97);
   transition: opacity 320ms ease, transform 360ms ease;
+  pointer-events: none;
 }
 
 .album-page.is-active {
   opacity: 1;
   transform: rotateY(0) translateX(0) scale(1);
   z-index: 3;
+  pointer-events: auto;
 }
 
 .album-page.is-prev {
@@ -296,6 +300,8 @@ h1 {
 }
 
 .album-nav {
+  position: relative;
+  z-index: 4;
   width: 42px;
   height: 42px;
   border: 0;
