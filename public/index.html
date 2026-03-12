@@ -3,37 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>РАЗВОД</title>
-    <style>
-      :root {
-        color-scheme: dark;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        background: #000;
-        color: #fff;
-        font-family: Arial, sans-serif;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(4rem, 18vw, 16rem);
-        font-weight: 900;
-        line-height: 1;
-        text-align: center;
-        letter-spacing: 0.04em;
-      }
-    </style>
+    <title>Под этими звёздами началась наша история</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jura:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <h1>РАЗВОД</h1>
+    <main class="poster">
+      <section class="top-title">
+        <h1>Под этими звездами началась<br />наша история</h1>
+      </section>
+
+      <section class="sky-frame">
+        <canvas id="star-map" width="1000" height="1000" aria-label="Звёздная карта"></canvas>
+      </section>
+
+      <section class="text-block">
+        <p>Звёздное небо</p>
+        <p>Ташкент</p>
+        <p>15 ноября 2024 года в 16:03</p>
+      </section>
+
+      <section class="messages" aria-label="Мои послания">
+        <p class="message-text">Это звездное небо над Ташкентом в тот самый день когда ты покорила мое сердце малыш, надеюсь что тебе понравился мой сюрприз дорогая. Я должен был дать тебе его 14 февраля, но я лишь хотел посмотреть твою реакцию в живую. Милая моя, спасибо что ты есть, я безумно сильно люблю и ценю каждый момент с тобой </p>
+      </section>  
+    </main>
+
+    <script src="./script.js"></script>
   </body>
 </html>
